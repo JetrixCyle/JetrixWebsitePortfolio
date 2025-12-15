@@ -15,26 +15,129 @@ html, body {
 }
 
 /* NAVIGATION – mobile stack */
+/* NAVIGATION MOBILE TOGGLE */
 @media (max-width: 768px) {
-    nav {
-        flex-wrap: wrap;
-        padding: 0.8rem 1rem;
-    }
-
-    .logo {
-        font-size: 1.1rem;
-        text-align: center;
-        width: 100%;
-        margin-bottom: 8px;
-    }
-
     .nav-links {
-        width: 100%;
-        justify-content: center;
-        gap: 1.2rem;
-        flex-wrap: wrap;
+        display: none;
+        position: absolute;
+        top: 80px;
+        right: 0;
+        background: rgba(10, 10, 10, 0.95);
+        flex-direction: column;
+        width: 200px;
+        padding: 1rem;
+        border-radius: 10px 0 0 10px;
+        box-shadow: 0 5px 20px rgba(138,43,226,0.3);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin-bottom: 1rem;
+    }
+
+    .menu-toggle {
+        display: block;
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: #fff;
+    }
+
+    nav {
+        padding: 1rem 2rem;
     }
 }
+
+/* HERO SECTION */
+@media (max-width: 768px) {
+    .hero {
+        padding: 50px 15px 30px;
+    }
+    .hero h1 {
+        font-size: 2rem;
+    }
+    .hero p {
+        font-size: 1rem;
+    }
+    .cta-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* ABOUT SECTION */
+@media (max-width: 768px) {
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .floating-image {
+        width: 200px;
+        height: 200px;
+        font-size: 5rem;
+    }
+    .skills {
+        justify-content: center;
+    }
+}
+
+/* PROJECTS SECTION */
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .project-image {
+        height: 150px;
+    }
+    .project-info h3 {
+        font-size: 1.2rem;
+    }
+    .project-info p {
+        font-size: 0.9rem;
+    }
+}
+
+/* CONTACT SECTION */
+@media (max-width: 600px) {
+    .contact-table-container {
+        padding: 20px;
+    }
+
+    .contact-table th,
+    .contact-table td {
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+
+    .contact-table tr {
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    .gmail-form-container {
+        padding: 20px;
+    }
+}
+
+/* FOOTER */
+@media (max-width: 768px) {
+    footer {
+        padding: 1.5rem;
+    }
+    .social-links {
+        gap: 10px;
+    }
+    .social-links a {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+}
+
 
 /* HERO SECTION */
 @media (max-width: 768px) {
@@ -1381,6 +1484,8 @@ footer {
 
     <!-- Navigation -->
     <nav>
+        <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+
         <div class="logo">Jetrix Cyle V. Tindoy</div>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
@@ -1735,7 +1840,16 @@ if (window.innerWidth < 768) {
     popup.addEventListener("click", () => {
         popup.style.display = "none";
     });
-</script>   
+</script>  
+    <script>
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+});
+</script>
+
 <script>
 function openGallery() {
     const gallery = document.getElementById("memoryGallery");
@@ -1842,4 +1956,5 @@ window.addEventListener("resize", () => {
 
 </body>
 </html>
+
 
