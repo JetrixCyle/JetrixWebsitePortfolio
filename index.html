@@ -1673,6 +1673,15 @@ function closeGallery2() {
     document.getElementById("memoryGallery2").style.display = "none";
 }
 </script>
+    <script>
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.querySelector(".nav-links");
+
+menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+});
+</script>
+
 <script>
 function sendGmail(e) {
     e.preventDefault();
@@ -1734,3 +1743,4 @@ window.addEventListener("resize", () => {
 </body>
 
 </html>
+
