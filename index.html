@@ -604,6 +604,81 @@
                 max-width: 200px;
             }
         }
+        /* Image Popup/Modal */
+.image-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 20px;
+}
+
+.image-popup.active {
+    display: flex;
+}
+
+.popup-content {
+    position: relative;
+    max-width: 95%;
+    max-height: 95%;
+    animation: popupZoom 0.3s ease;
+}
+
+.popup-content img {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 15px;
+    box-shadow: 0 0 60px rgba(138, 43, 226, 0.8), 0 0 100px rgba(0, 191, 255, 0.5);
+    object-fit: contain;
+}
+
+.close-popup {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #fff;
+    color: #fff;
+    font-size: 2rem;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.close-popup:hover {
+    background: #8a2be2;
+    transform: rotate(90deg);
+}
+
+@keyframes popupZoom {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.project-image {
+    cursor: pointer;
+}
+
+.project-image img {
+    cursor: pointer;
+}
     </style>
 </head>
 <body>
@@ -735,6 +810,13 @@
             </div>
         </div>
     </section>
+    <!-- Image Popup Modal -->
+<div id="imagePopup" class="image-popup">
+    <div class="popup-content">
+        <button class="close-popup" id="closePopup">&times;</button>
+        <img id="popupImg" src="" alt="Full View">
+    </div>
+</div>
 
     <!-- Contact Section -->
     <section id="contact">
@@ -833,47 +915,48 @@
             window.open(gmailURL, "_blank");
         }
         // Image Popup Functionality
-    const popup = document.getElementById("imagePopup");
-    const popupImg = document.getElementById("popupImg");
-    const closeBtn = document.getElementById("closePopup");
+const popup = document.getElementById("imagePopup");
+const popupImg = document.getElementById("popupImg");
+const closeBtn = document.getElementById("closePopup");
 
-    // Get all project images
-    const projectImages = document.querySelectorAll(".project-image img");
+// Get all project images
+const projectImages = document.querySelectorAll(".project-image img");
 
-    // Add click event to each image
-    projectImages.forEach(img => {
-        img.addEventListener("click", () => {
-            popup.classList.add("active");
-            popupImg.src = img.src;
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
-        });
+// Add click event to each image
+projectImages.forEach(img => {
+    img.addEventListener("click", () => {
+        popup.classList.add("active");
+        popupImg.src = img.src;
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
     });
+});
 
-    // Close popup when close button is clicked
-    closeBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
+// Close popup when close button is clicked
+closeBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    popup.classList.remove("active");
+    document.body.style.overflow = 'auto';
+});
+
+// Close popup when clicking outside the image
+popup.addEventListener("click", (e) => {
+    if (e.target === popup) {
         popup.classList.remove("active");
         document.body.style.overflow = 'auto';
-    });
+    }
+});
 
-    // Close popup when clicking outside the image
-    popup.addEventListener("click", (e) => {
-        if (e.target === popup) {
-            popup.classList.remove("active");
-            document.body.style.overflow = 'auto';
-        }
-    });
-
-    // Close popup with ESC key
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && popup.classList.contains("active")) {
-            popup.classList.remove("active");
-            document.body.style.overflow = 'auto';
-        }
-    });
+// Close popup with ESC key
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && popup.classList.contains("active")) {
+        popup.classList.remove("active");
+        document.body.style.overflow = 'auto';
+    }
+});
     </script>
 </body>
 </html>
+
 
 
 
