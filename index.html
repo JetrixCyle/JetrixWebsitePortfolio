@@ -832,8 +832,48 @@
             const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=jetrixbang@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\n" + message)}`;
             window.open(gmailURL, "_blank");
         }
+        // Image Popup Functionality
+    const popup = document.getElementById("imagePopup");
+    const popupImg = document.getElementById("popupImg");
+    const closeBtn = document.getElementById("closePopup");
+
+    // Get all project images
+    const projectImages = document.querySelectorAll(".project-image img");
+
+    // Add click event to each image
+    projectImages.forEach(img => {
+        img.addEventListener("click", () => {
+            popup.classList.add("active");
+            popupImg.src = img.src;
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        });
+    });
+
+    // Close popup when close button is clicked
+    closeBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        popup.classList.remove("active");
+        document.body.style.overflow = 'auto';
+    });
+
+    // Close popup when clicking outside the image
+    popup.addEventListener("click", (e) => {
+        if (e.target === popup) {
+            popup.classList.remove("active");
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    // Close popup with ESC key
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && popup.classList.contains("active")) {
+            popup.classList.remove("active");
+            document.body.style.overflow = 'auto';
+        }
+    });
     </script>
 </body>
 </html>
+
 
 
